@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 
+fun NavDirections.popBackStack(fragment: Fragment, isInclusive: Boolean = true) {
+    fragment.findNavController().popBackStack(actionId, isInclusive)
+}
 fun NavDirections.navigate(fragment: Fragment, navigateAnimation: NavigateAnimationType? = null) {
     fragment.findNavController().navigate(this, animateNavOptionsFactory(navigateAnimation))
 }
