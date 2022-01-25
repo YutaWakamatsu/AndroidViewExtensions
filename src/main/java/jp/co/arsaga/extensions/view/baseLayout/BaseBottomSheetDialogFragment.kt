@@ -10,14 +10,15 @@ import jp.co.arsaga.extensions.view.R
 
 abstract class BaseBottomSheetDialogFragment: BottomSheetDialogFragment() {
 
-    protected abstract val adjustPeekHeight: Int
+    protected fun adjust(height: Int, isTransition: Boolean = true) {
+        dialog?.findViewById<View>(R.id.design_bottom_sheet)
+            ?.let { BottomSheetBehavior.from(it) }
+            ?.setPeekHeight(height, isTransition)
+    }
 
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog = super.onCreateDialog(savedInstanceState).also { dialog ->
         dialog.setContentView(View(context))
-        BottomSheetBehavior.from(dialog.findViewById(R.id.design_bottom_sheet)).apply {
-            setPeekHeight(adjustPeekHeight)
-        }
     }
 }
