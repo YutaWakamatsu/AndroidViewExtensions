@@ -6,6 +6,7 @@ enum class NavigateAnimationType(
     val popEnterAnimationId: Int = -1,
     val popExitAnimationId: Int = -1
 ) {
+    XML,
     SLIDE(
         enterAnimationId = R.anim.slide_in_enter_animator,
         exitAnimationId = R.anim.slide_in_exit_animator,
