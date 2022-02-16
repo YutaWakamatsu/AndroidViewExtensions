@@ -85,4 +85,8 @@ abstract class BaseWebViewFragment : Fragment() {
 
     abstract fun initWebView(webView: WebView)
 
+    fun WebView.loadUrlWithJS(url: String) {
+        settings.javaScriptEnabled = isEnabledJavascript(this, url)
+        loadUrl(url)
+    }
 }
