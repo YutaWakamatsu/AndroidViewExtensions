@@ -26,3 +26,12 @@ fun openChrome(
         }
     }
 }
+
+fun openLocalPdfList(
+    context: Context
+) {
+    Intent(Intent.ACTION_GET_CONTENT)
+        .setType("application/pdf")
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        .run { context.startActivity(this) }
+}
