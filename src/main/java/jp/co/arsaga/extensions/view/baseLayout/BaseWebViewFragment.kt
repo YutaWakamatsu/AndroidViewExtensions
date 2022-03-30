@@ -12,6 +12,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import jp.co.arsaga.extensions.view.R
 import timber.log.Timber
@@ -54,22 +55,21 @@ abstract class BaseWebViewFragment : Fragment() {
         Client(::getSwipeView, ::isEnabledJavascript)
     }
 
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.base_web_view, container, false)
-
-    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
-    override fun onStart() {
-        super.onStart()
-        getWebView()?.let { webView ->
-            initWebView(webView)
-            webView.webViewClient = webViewClient
-            setJavascriptEnabledAssist(webView.settings)
-        }
-        getSwipeView()?.setOnRefreshListener {
-            getWebView()?.reload()
+    ): View = inflater.inflate(R.layout.base_web_view, container, false).also {
+        lifecycleScope.launchWhenStarted {
+            getWebView()?.let { webView ->
+                initWebView(webView)
+                webView.webViewClient = webViewClient
+                setJavascriptEnabledAssist(webView.settings)
+            }
+            getSwipeView()?.setOnRefreshListener {
+                getWebView()?.reload()
+            }
         }
     }
 
