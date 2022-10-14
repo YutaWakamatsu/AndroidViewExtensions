@@ -18,5 +18,11 @@ enum class NavigateAnimationType(
         exitAnimationId = R.anim.pop_up_in_exit_animator,
         popEnterAnimationId = R.anim.pop_up_out_enter_animator,
         popExitAnimationId = R.anim.pop_up_out_exit_animator
+    ),
+    FADE(
+        enterAnimationId = android.R.anim.fade_in,
+        exitAnimationId = android.R.anim.fade_out,
+        popEnterAnimationId = android.R.anim.fade_in,
+        popExitAnimationId = android.R.anim.fade_out
     )
 }
