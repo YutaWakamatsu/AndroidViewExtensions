@@ -23,7 +23,7 @@ fun NavDirections.navigate(
     fragment: Fragment,
     navigateAnimation: NavigateAnimationType? = null,
     preAction: () -> Unit = {},
-    onError: (Throwable) -> Unit = {},
+    onError: (Throwable) -> Unit = { Timber.e(it) },
 ) {
     preAction()
     runCatching {
