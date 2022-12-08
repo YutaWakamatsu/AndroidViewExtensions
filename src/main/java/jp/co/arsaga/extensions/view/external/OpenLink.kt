@@ -12,9 +12,18 @@ fun openChrome(
     context: Context,
     url: String
 ) {
+    openWeb(context, url, "com.android.chrome")
+}
+
+@RequiresApi(Build.VERSION_CODES.DONUT)
+fun openWeb(
+    context: Context,
+    url: String,
+    packageName: String?,
+) {
     Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        setPackage("com.android.chrome")
+        packageName?.run { setPackage(this) }
     }.let {
         runCatching {
             context.startActivity(it)
